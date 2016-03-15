@@ -14,12 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
 public class IHMVoiture extends JFrame implements Observer{
 
 	private double paramatreConversionMetresPixels = 0.5;
 	private Voiture maVoiture;
+    private Route maRoute;
 	private CommandeVoiture maCommandeVoiture;
 	
 	private void initGraphique() {
@@ -28,12 +30,15 @@ public class IHMVoiture extends JFrame implements Observer{
 
 		this.maCommandeVoiture = new CommandeVoiture(this, maVoiture);
 
+
 		this.setVisible(true);
 	}
 	
-	public IHMVoiture(Voiture maVoiture) {
+	public IHMVoiture(Voiture maVoiture, Route maRoute) {
 		super();
 		this.maVoiture = maVoiture;
+        this.maRoute = maRoute;
+        maRoute.addObserver(this);
 		maVoiture.addObserver(this);
 		initGraphique();
 	}
@@ -56,9 +61,15 @@ public class IHMVoiture extends JFrame implements Observer{
 	@Override
 	public void paint(Graphics contexteGraphique) {
 		super.paint(contexteGraphique);
-		contexteGraphique.setColor(Color.red);
-		dessinerVoiture(contexteGraphique);
-	}
+
+        contexteGraphique.setColor(Color.gray);
+        dessinerRouteHorizontale(contexteGraphique, 0, 260);
+        contexteGraphique.setColor(Color.gray);
+        dessinerRouteVerticale(contexteGraphique, 400, 0);
+        contexteGraphique.setColor(Color.red);
+        dessinerVoiture(contexteGraphique);
+
+    }
 
 
 	private void dessinerVoiture(Graphics contexteGraphique) {
@@ -66,5 +77,14 @@ public class IHMVoiture extends JFrame implements Observer{
 		int xPixel = calculerPositionPixels(xMetres);
 		contexteGraphique.fillRect(xPixel, 300, 30, 15);
 	}
+
+    private void dessinerRouteHorizontale(Graphics contexteGraphique, int x, int y){
+        contexteGraphique.fillRect(x, y, this.getSize().width, 60);
+    }
+
+    private void dessinerRouteVerticale(Graphics contexteGraphique, int x, int y){
+        contexteGraphique.fillRect(x, y, 60, this.getSize().height);
+    }
+
 	
 }
