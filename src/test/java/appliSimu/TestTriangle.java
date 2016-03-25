@@ -1,4 +1,4 @@
-package AppliSimu;
+package appliSimu;
 
 
 import static org.junit.Assert.*;
@@ -15,7 +15,7 @@ public class TestTriangle {
 	@Test
 	public void testConversionMetresPixels() {
 		
-		IHMVoiture monTriangle = new IHMVoiture();
+		IhmVoiture monTriangle = new IhmVoiture();
 		
 		int xPixels = monTriangle.calculerPositionPixels(110);
 		

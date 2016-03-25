@@ -1,23 +1,14 @@
-package AppliSimu;
+package appliSimu;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import domaineroute.Route;
+import domaineVoiture.Voiture;
 
-import DomaineRoute.Route;
-import DomaineVoiture.Voiture;
-
-public class IHMVoiture extends JFrame implements Observer{
+public class IhmVoiture extends JFrame implements Observer{
 
 	private double paramatreConversionMetresPixels = 0.5;
 	private Voiture maVoiture;
@@ -26,15 +17,12 @@ public class IHMVoiture extends JFrame implements Observer{
 	
 	private void initGraphique() {
 		this.setTitle("Simulateur de Voiture");
-		this.setSize(505, 505);
-
+		this.setSize(1000, 1000);
 		this.maCommandeVoiture = new CommandeVoiture(this, maVoiture);
-
-
 		this.setVisible(true);
 	}
 	
-	public IHMVoiture(Voiture maVoiture, Route maRoute) {
+	public IhmVoiture(Voiture maVoiture, Route maRoute) {
 		super();
 		this.maVoiture = maVoiture;
         this.maRoute = maRoute;
@@ -43,7 +31,7 @@ public class IHMVoiture extends JFrame implements Observer{
 		initGraphique();
 	}
 
-	public IHMVoiture() {
+	public IhmVoiture() {
 		super();
 		initGraphique();
 		this.maVoiture = null;
@@ -75,11 +63,27 @@ public class IHMVoiture extends JFrame implements Observer{
 	private void dessinerVoiture(Graphics contexteGraphique) {
 		int xMetres = maVoiture.getX();
 		int xPixel = calculerPositionPixels(xMetres);
-		contexteGraphique.fillRect(xPixel, 300, 30, 15);
+        int yMetres = maVoiture.getY();
+        int yPixel = calculerPositionPixels(yMetres);
+        if((maVoiture.getDirection() == 180) || (maVoiture.getDirection() == 0)) {
+            contexteGraphique.fillRect(xPixel, 300-yPixel, 30, 15);
+        }
+        if((maVoiture.getDirection() == 270) || (maVoiture.getDirection() == 90)) {
+            contexteGraphique.fillRect(xPixel, 300-yPixel, 15, 30);
+        }
+
 	}
 
     private void dessinerRouteHorizontale(Graphics contexteGraphique, int x, int y){
         contexteGraphique.fillRect(x, y, this.getSize().width, 60);
+
+        Graphics2D g2d = (Graphics2D) contexteGraphique;
+        Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+        g2d.setStroke(dashed);
+        g2d.setColor(Color.white);
+        g2d.drawLine(0, 290,  this.getSize().width, 290);
+
+
     }
 
     private void dessinerRouteVerticale(Graphics contexteGraphique, int x, int y){

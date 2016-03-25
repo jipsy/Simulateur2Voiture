@@ -1,4 +1,4 @@
-package DomaineVoiture;
+package domaineVoiture;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ public class TestVoiture {
 	
 	@Before
 	public void setUp(){
-		maVoiture = new Voiture (100, 0, 10);
+		maVoiture = new Voiture (100, 10,0);
 	}
 	
 	@Test
@@ -30,6 +30,7 @@ public class TestVoiture {
 		
 		assertEquals(20, maVoiture.getVitesse());
 	}
+
 	
 	@Test
 	public void testAccelerationLimite() {
@@ -77,5 +78,9 @@ public class TestVoiture {
 		assertEquals(0, maVoiture.getX());
 		
 	}
+
+
+
+
 	
 }

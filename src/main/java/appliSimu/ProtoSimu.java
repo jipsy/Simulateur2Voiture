@@ -1,12 +1,12 @@
-package AppliSimu;
+package appliSimu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import DomaineRoute.Route;
-import DomaineVoiture.Voiture;
+import domaineVoiture.Voiture;
+import domaineroute.Route;
 
 public class ProtoSimu {
 
@@ -14,24 +14,19 @@ public class ProtoSimu {
 
 	public static void main(String[] args) {
 
-		final Voiture maVoiture = new Voiture (100, 0, 10);
+		final Voiture maVoiture = new Voiture (100, 10,10);
         final Route maRoute = new Route(0,100);
-		IHMVoiture monTriangle = new IHMVoiture(maVoiture,maRoute);
-		
-		Timer timerAvancer = new Timer(dureeUneSecondeEnMilliSecondes, new ActionListener() {
+		IhmVoiture monTriangle = new IhmVoiture(maVoiture,maRoute);
+
+        Timer timerAvancer = new Timer(dureeUneSecondeEnMilliSecondes, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				maVoiture.miseAJourPosition();
 			}
 		});
-		
 		timerAvancer.start();
-		
 		while(true){
-
 		}
-
 	}
-
 }
