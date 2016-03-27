@@ -1,11 +1,11 @@
-package appliSimu;
+package applisimu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import domaineVoiture.Voiture;
+import domainevoiture.Voiture;
 import domaineroute.Route;
 
 public class ProtoSimu {

@@ -1,4 +1,4 @@
-package domaineVoiture;
+package domainevoiture;
 
 import static org.junit.Assert.*;
 

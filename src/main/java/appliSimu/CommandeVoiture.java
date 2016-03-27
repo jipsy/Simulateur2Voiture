@@ -1,4 +1,4 @@
-package appliSimu;
+package applisimu;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import domaineVoiture.Voiture;
+import domainevoiture.Voiture;
 
 /**
  * @author Jp
@@ -16,11 +16,11 @@ import domaineVoiture.Voiture;
  */
 public class CommandeVoiture extends JPanel implements ActionListener {
     /**
-     * Bouton acceler
+     * Bouton acceler.
      */
     private JButton boutonAccelerer;
     /**
-     * Bouton inverser direction
+     * Bouton inverser direction.
      */
     private JButton boutonInverserDirection;
     /**
@@ -32,15 +32,17 @@ public class CommandeVoiture extends JPanel implements ActionListener {
      */
     private JButton boutonTournerGauche;
     /**
-     * Object voiture
+     * Object voiture.
      */
-    private Voiture maVoiture;
-
-	public CommandeVoiture (JFrame fenetre, Voiture maVoiture) {
-		
-		super();
-		this.setLayout(new FlowLayout());
-
+    private Voiture myVoiture;
+    /**
+     * Affichage des boutons.
+     * @param fenetre fenetre d'affichage
+     * @param maVoiture voiture
+     */
+    public CommandeVoiture(final JFrame fenetre, final Voiture maVoiture) {
+        super();
+        this.setLayout(new FlowLayout());
         boutonTournerDroite = new JButton("Tourner a droite");
         boutonTournerDroite.addActionListener(this);
         this.add(boutonTournerDroite);
@@ -49,33 +51,28 @@ public class CommandeVoiture extends JPanel implements ActionListener {
         boutonTournerGauche.addActionListener(this);
         this.add(boutonTournerGauche);
 
-		boutonAccelerer = new JButton("Accelerer");
-		boutonAccelerer.addActionListener(this);
-		this.add(boutonAccelerer);
+        boutonAccelerer = new JButton("Accelerer");
+        boutonAccelerer.addActionListener(this);
+        this.add(boutonAccelerer);
 
-		boutonInverserDirection = new JButton("Changer direction");
-		boutonInverserDirection.addActionListener(this);
-		this.add(boutonInverserDirection);
+        boutonInverserDirection = new JButton("Changer direction");
+        boutonInverserDirection.addActionListener(this);
+        this.add(boutonInverserDirection);
+        fenetre.add(this);
+        this.myVoiture = maVoiture;
+    }
 
-		fenetre.add(this);
-		this.maVoiture = maVoiture;
-
-
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		Object bouton = event.getSource();
-		if (bouton == boutonAccelerer)
-			maVoiture.accelerer();
-		else if(bouton == boutonInverserDirection )
-			maVoiture.inverserDirection();
-        else if(bouton == boutonTournerDroite)
-            maVoiture.tournerDroite();
-        else if(bouton == boutonTournerGauche)
-            maVoiture.tournerGauche();
-	}
-	
-
+    @Override
+    final public void actionPerformed(final ActionEvent event) {
+        Object bouton = event.getSource();
+        if (bouton == boutonAccelerer) {
+            myVoiture.accelerer();
+        } else if (bouton == boutonInverserDirection) {
+            myVoiture.inverserDirection();
+        } else if (bouton == boutonTournerDroite) {
+            myVoiture.tournerDroite();
+        } else if (bouton == boutonTournerGauche) {
+            myVoiture.tournerGauche();
+        }
+    }
 }
